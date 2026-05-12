@@ -49,7 +49,7 @@
                 yAxis: {
                     tickLabelProps: {
                         dx: -12,
-                        class: "fill-primary!",
+                        class: "fill-primary! font-semibold!",
                     },
                     tickLength: 0,
                 },

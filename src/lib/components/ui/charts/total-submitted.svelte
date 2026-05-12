@@ -29,7 +29,7 @@
 <Chart.Root class="col-span-1">
     <Chart.Title
         title="Total per user"
-        description="Total number of bug reports submitted by each user. Users with less than 3 reports are excluded"
+        description="Total number of bug reports submitted by each user"
     />
     <Chart.Content {chartConfig} bind:width>
         <BarChart
@@ -38,7 +38,6 @@
             labels={{ offset: 12, value: "total", seriesKey: "bug" }}
             orientation="horizontal"
             y="username"
-            axis="y"
             x="total"
             rule
             legend
@@ -47,24 +46,25 @@
                 { key: "a11y", label: "A11y", color: chartConfig.a11y.color, selected: true },
             ]}
             seriesLayout="overlap"
-            padding={{ right: 16 }}
+            padding={{ right: 16, left: 130, bottom: 42 }}
             height={500}
             {width}
             props={{
                 bars: {
                     stroke: "none",
                     radius: 6,
-                    height: 24,
+                    height: 20,
                     rounded: "all"
                 },
                 highlight: { area: { fill: "none" } },
                 yAxis: {
                     tickLabelProps: {
-                        textAnchor: "start",
-                        dx: 6,
-                        class: "fill-primary-foreground! font-semibold!",
-                    }
-                }
+                        textAnchor: "end",
+                        // dx: -12,
+                        class: "fill-primary! font-semibold!",
+                    },
+                    tickLength: 10,
+                },
             }}
         >
             {#snippet tooltip()}
