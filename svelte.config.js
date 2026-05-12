@@ -1,0 +1,24 @@
+import adapter from "@sveltejs/adapter-node"
+
+/** @type {import('@sveltejs/kit').Config} */
+const config = {
+	compilerOptions: {
+		runes: ({ filename }) => (filename.split(/[/\\]/).includes("node_modules") ? undefined : true)
+	},
+	kit: {
+		adapter: adapter({
+            out: "build",
+            precompress: true
+        }),
+        alias: {
+            "@components/*": "./src/lib/components/ui/*",
+            "@assets/*": "./src/lib/assets/*",
+            "@types": "./src/lib/types.ts",
+            "@utils": "./src/lib/utils.ts",
+            "@helpers": "./src/lib/helpers/*",
+            "@generator": "./src/lib/generator/*",
+        }
+	}
+}
+
+export default config
