@@ -24,6 +24,6 @@ export const COLORS = {
 } as const
 
 export const API_BASE = "https://api.fluxer.app"
-export const DATA_DIR = path.join("src", "lib", "generator-v2", "data")
-export const PROCESSED_FILE = path.join("src", "lib", "generator-v2", "data.json")
-export const INFO_FILE = path.join("src", "lib", "generator-v2", "info.json")
+export const DATA_DIR = path.join("src", "lib", "generator", "data")
+export const PROCESSED_FILE = path.join("src", "lib", "generator", "data.json")
+export const INFO_FILE = path.join("src", "lib", "generator", "info.json")
