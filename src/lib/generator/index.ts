@@ -1,6 +1,6 @@
-import { processAll } from "@generator-v2/process"
-import { INFO_FILE } from "@generator-v2/config"
-import { fetchAll } from "@generator-v2/fetch"
+import { processAll } from "@generator/process"
+import { INFO_FILE } from "@generator/config"
+import { fetchAll } from "@generator/fetch"
 import type { InfoFileData } from "@types"
 import fs from "fs/promises"
 
