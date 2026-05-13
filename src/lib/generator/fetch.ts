@@ -1,4 +1,4 @@
-import { TOKEN, CHANNELS, API_BASE, DATA_DIR } from "@generator-v2/config"
+import { TOKEN, CHANNELS, API_BASE, DATA_DIR } from "@generator/config"
 import fs from "fs/promises"
 import path from "path"
 

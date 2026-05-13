@@ -1,5 +1,5 @@
-import { CHANNELS, COLORS, DATA_DIR, PROCESSED_FILE } from "@generator-v2/config"
-import type { ChannelName } from "@generator-v2/config"
+import { CHANNELS, COLORS, DATA_DIR, PROCESSED_FILE } from "@generator/config"
+import type { ChannelName } from "@generator/config"
 import type { BugReportData } from "@types"
 import fs from "fs/promises"
 import path from "path"
