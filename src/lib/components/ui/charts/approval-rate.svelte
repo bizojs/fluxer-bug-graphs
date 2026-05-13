@@ -4,6 +4,7 @@
     import * as Chart from "@components/charts/base"
     import type { BugReportData } from "@types"
     import { PieChart, Text } from "layerchart"
+    import { settings } from "@localstorage"
 
     let { data }: { data: BugReportData[] } = $props()
 
@@ -36,7 +37,7 @@
         <PieChart
             class="mx-auto"
             data={approvalRate as any}
-            legend
+            legend={!!settings.state.legends}
             innerRadius={-15}
             cornerRadius={6}
             padAngle={0.03}
@@ -58,53 +59,7 @@
             }}
         >
             {#snippet aboveMarks()}
-                <Text
-                    value="{percentage}%"
-                    textAnchor="middle"
-                    verticalAnchor="middle"
-                    class="text-2xl! font-bold!"
-                    dy={3}
-                />
-            {/snippet}
-            {#snippet tooltip()}
-                <Tooltip label="Bug Reports" />
-            {/snippet}
-        </PieChart>
-    </Chart.Content>
-</Chart.Root>
-
-<!-- <div class="flex flex-col gap-4 p-4 rounded-3xl bg-primary/5 dark:bg-primary/2 border md:col-span-2 col-span-1">
-    <div class="flex flex-col">
-        <p class="text-lg font-bold">Approval rate</p>
-        <p class="text-sm text-muted-foreground">How many bug reports are currently approved vs still in the approval queue</p>
-    </div>
-    <div bind:this={containerEl}>
-        <Chart.Container config={chartConfig} class="h-37.5">
-            <PieChart
-                class="mx-auto"
-                data={approvalRate as any}
-                legend
-                innerRadius={-15}
-                cornerRadius={6}
-                padAngle={0.03}
-                key="key"
-                value="value"
-                c="color"
-                cRange={Object.values(chartConfig).map((item) => item.color)}
-                height={150}
-                width={chartWidth}
-                props={{
-                    highlight: { area: { fill: "none" } },
-                    yAxis: {
-                        tickLabelProps: {
-                            textAnchor: "start",
-                            dx: 6,
-                            class: "fill-primary-foreground! font-semibold!",
-                        }
-                    }
-                }}
-            >
-                {#snippet aboveMarks()}
+                {#if settings.state.values}
                     <Text
                         value="{percentage}%"
                         textAnchor="middle"
@@ -112,11 +67,11 @@
                         class="text-2xl! font-bold!"
                         dy={3}
                     />
-                {/snippet}
-                {#snippet tooltip()}
-                    <Chart.Tooltip label="Bug Reports" />
-                {/snippet}
-            </PieChart>
-        </Chart.Container>
-    </div>
-</div> -->
+                {/if}
+            {/snippet}
+            {#snippet tooltip()}
+                <Tooltip label="Bug Reports" />
+            {/snippet}
+        </PieChart>
+    </Chart.Content>
+</Chart.Root>

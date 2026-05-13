@@ -1,8 +1,9 @@
 <script lang="ts">
     import { type ChartConfig, Tooltip }  from "@components/chart"
     import { BugReportHelper } from "@helpers/BugReportHelper"
+    import type { BugReportData, Settings } from "@types"
     import * as Chart from "@components/charts/base"
-    import type { BugReportData } from "@types"
+    import { settings } from "@localstorage"
     import { BarChart } from "layerchart"
 
     let { data }: { data: BugReportData[] } = $props()
@@ -35,18 +36,19 @@
         <BarChart
             class="mr-auto"
             data={totalSubmitted}
-            labels={{ offset: 12, value: "total", seriesKey: "bug" }}
+            labels={settings.state.values ? { offset: 12, value: "total", seriesKey: "bug" } : false}
             orientation="horizontal"
             y="username"
             x="total"
+            axis={!!settings.state.labels}
             rule
-            legend
+            legend={!!settings.state.legends}
             series={[
                 { key: "bug", label: "Bug", color: chartConfig.bug.color, selected: true },
                 { key: "a11y", label: "A11y", color: chartConfig.a11y.color, selected: true },
             ]}
             seriesLayout="overlap"
-            padding={{ right: 16, left: 130, bottom: 42 }}
+            padding={{ right: 16, left: settings.state.labels ? 130 : 0, bottom: settings.state.legends ? 42 : 0 }}
             height={500}
             {width}
             props={{
@@ -56,19 +58,20 @@
                     height: 20,
                     rounded: "all"
                 },
-                highlight: { area: { fill: "none" } },
+                highlight: { area: settings.state.highlights ? true : { fill: "none" } },
                 yAxis: {
                     tickLabelProps: {
                         textAnchor: "end",
-                        // dx: -12,
                         class: "fill-primary! font-semibold!",
                     },
                     tickLength: 10,
                 },
             }}
         >
-            {#snippet tooltip()}
-                <Tooltip label="Bug Reports" />
+            {#snippet tooltip(context)}
+                <Tooltip
+                    labelFormatter={(v: string) => context.context.data.username}
+                />
             {/snippet}
         </BarChart>
     </Chart.Content>

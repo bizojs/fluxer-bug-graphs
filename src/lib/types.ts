@@ -8,6 +8,14 @@ export interface BugReportData {
     fixed: boolean
 }
 
+export interface Settings {
+    labels: boolean
+    legends: boolean
+    values: boolean
+    highlights: boolean
+    per_user: boolean
+}
+
 export interface ChartTotalByUser {
     username: string
     count: {

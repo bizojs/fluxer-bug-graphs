@@ -17,6 +17,8 @@ const config = {
             "@utils": "./src/lib/utils.ts",
             "@helpers": "./src/lib/helpers/*",
             "@generator": "./src/lib/generator/*",
+            "@stores": "./src/lib/stores/*",
+            "@localstorage": "./src/lib/stores/storage.svelte.ts",
         }
 	}
 }
