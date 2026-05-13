@@ -16,34 +16,27 @@ export class BugReportHelper {
     }
 
     static getTotalReportsByUser(data: BugReportData[], min: number, approvedOnly: boolean = false) {
-        const map = new Map<string, { bug: number; a11y: number }>()
+        const map = new Map<string, { bug: number; a11y: number; username: string }>()
 
         for (const report of data) {
             if (approvedOnly && !report.approved) continue
+            const id = this.getId(report.user)
             const username = this.getUsername(report.user)
-            const entry = map.get(username) ?? { bug: 0, a11y: 0 }
+            const entry = map.get(id) ?? { bug: 0, a11y: 0, username }
             entry[report.type]++
-            map.set(username, entry)
+            entry.username = username
+            map.set(id, entry)
         }
 
-        let mapped = [...map.entries()]
-            .map(([username, counts]) => ({
-                username,
-                count: {
-                    bug: counts.bug,
-                    a11y: counts.a11y,
-                    total: counts.bug + counts.a11y,
-                }
+        return [...map.entries()]
+            .map(([_, counts]) => ({
+                username: counts.username,
+                bug: counts.bug,
+                a11y: counts.a11y,
+                total: counts.bug + counts.a11y,
             }))
-            .sort((a, b) => b.count.total - a.count.total)
-            .filter(d => d.count.total > min)
-
-            return mapped.map(d => ({
-                username: d.username,
-                bug: d.count.bug,
-                a11y: d.count.a11y,
-                total: d.count.total,
-            }))
+            .sort((a, b) => b.total - a.total)
+            .filter(d => d.total > min)
     }
 
     static getBugVsA11y(data: BugReportData[]) {
