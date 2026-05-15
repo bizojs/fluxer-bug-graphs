@@ -19,11 +19,11 @@
     const chartConfig = {
         approved: {
             label: "Approved",
-            color: "var(--approved)",
+            color: "var(--status-success)",
         },
         not_approved: {
             label: "Not Approved",
-            color: "var(--not-approved)",
+            color: "var(--status-danger)",
         }
     } satisfies ChartConfig
 </script>

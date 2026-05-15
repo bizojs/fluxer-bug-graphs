@@ -40,10 +40,10 @@
 	--sidebar-ring: oklch(0.708 0 0);
     --canary: oklch(0.7945 0.1709 71.19);
     --a11y: oklch(0.522 0.1771 255.83);
-    --approved: oklch(0.8323 0.1716 154.78);
-    --not-approved: oklch(0.6492 0.1806 19.73);
-    --font-sans: 'Inter Variable', sans-serif;
     --font-mono: "Berkeley Mono Variable", monospace;
+
+    --status-success: oklch(0.8323 0.1716 154.78);
+    --status-danger: oklch(0.6492 0.1806 19.73);
 }
 
 .dark {
@@ -125,6 +125,9 @@
 	--radius-2xl: calc(var(--radius) * 1.8);
 	--radius-3xl: calc(var(--radius) * 2.2);
 	--radius-4xl: calc(var(--radius) * 2.6);
+    --status-success: var(--status-success);
+    --status-danger: var(--status-danger);
+    --status-undetermined: var(--border);
 }
 
 @layer base {
