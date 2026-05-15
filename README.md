@@ -46,6 +46,6 @@ interface BugReportData {
     date: string // ISO date string when the report was created
     type: "bug" | "a11y" // the type of bug
     approved: boolean // whether the bug was approved (no longer in #Approval Queue)
-    fixed: false // not implemented
+    fixed: boolean | null // true: report in #Fixed Bugs | false: report in #canary/a11y-bug-report | null: report in #Claimed Fixed
 }
 ```
