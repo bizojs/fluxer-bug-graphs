@@ -1,8 +1,9 @@
 <script lang="ts">
-  import { page } from "$app/state";
 	import "./layout.css"
     import "@fontsource-variable/ibm-plex-sans/wght.css"
+    import * as Tooltip from "@components/tooltip"
     import { ModeWatcher } from "mode-watcher"
+    import { page } from "$app/state"
 
 	let { children } = $props()
 </script>
@@ -21,6 +22,8 @@
     <meta property="og:url" content={page.url.href}>
 </svelte:head>
 
-<div class="w-dvw min-h-screen overflow-x-hidden">
-    {@render children()}
-</div>
+<Tooltip.Provider>
+    <div class="w-dvw min-h-screen overflow-x-hidden">
+        {@render children()}
+    </div>
+</Tooltip.Provider>

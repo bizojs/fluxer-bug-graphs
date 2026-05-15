@@ -2,11 +2,11 @@
     import SettingsIcon from "@lucide/svelte/icons/settings"
     import { IsMobile } from "$lib/hooks/is-mobile.svelte"
     import { buttonVariants } from "@components/button"
-    import { settings } from "@localstorage"
     import * as Dialog from "@components/dialog"
     import * as Drawer from "@components/drawer"
     import { Switch } from "@components/switch"
     import { Label } from "@components/label"
+    import { settings } from "@localstorage"
     import { cn } from "@utils"
 
     let open = $state(false)
