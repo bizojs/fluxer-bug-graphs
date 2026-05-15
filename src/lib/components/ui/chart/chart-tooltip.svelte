@@ -23,6 +23,7 @@
 		formatter,
 		nameKey,
 		color,
+        mode = "x",
 		...restProps
 	}: WithoutChildren<WithElementRef<HTMLAttributes<HTMLDivElement>>> & {
 		hideLabel?: boolean;
@@ -31,6 +32,7 @@
 		nameKey?: string;
 		labelKey?: string;
 		hideIndicator?: boolean;
+        mode?: "y" | "x";
 		labelClassName?: string;
 		labelFormatter?: // eslint-disable-next-line @typescript-eslint/no-explicit-any
 			((value: any, payload: TooltipPayload[]) => string | number | Snippet) | null;
@@ -63,7 +65,7 @@
 		const tooltipData = chartCtx.tooltip.data;
 
 		// Get the x-axis label value from the raw tooltip data (e.g. a Date or month string)
-		const dataLabel = tooltipData != null ? chartCtx.x(tooltipData) : undefined;
+		const dataLabel = tooltipData != null ? chartCtx[mode](tooltipData) : undefined;
 
 		const key = labelKey ?? item?.label ?? item?.key ?? "value";
 		const itemConfig = getPayloadConfigFromPayload(
