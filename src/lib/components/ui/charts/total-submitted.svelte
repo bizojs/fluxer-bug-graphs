@@ -44,7 +44,7 @@
             labels={settings.state.values ? { offset: 12, value: "total", seriesKey: "bug" } : false}
             orientation="horizontal"
             y="username"
-            axis={settings.state.labels ? "y" : false}
+            axis={!!settings.state.labels}
             rule
             legend={!!settings.state.legends}
             series={[
@@ -52,7 +52,7 @@
                 { key: "a11y", label: "A11y", color: chartConfig.a11y.color, selected: true },
             ]}
             seriesLayout="overlap"
-            padding={{ right: 16, left: settings.state.labels ? 100 : 0, bottom: settings.state.legends ? 42 : 0 }}
+            padding={{ right: 24, left: settings.state.labels ? 100 : 0, bottom: settings.state.legends ? 42 : 0 }}
             height={500}
             {width}
             props={{
@@ -73,7 +73,7 @@
             }}
         >
             {#snippet tooltip()}
-                <Tooltip hideLabel />
+                <Tooltip mode="y" />
             {/snippet}
         </BarChart>
     </Chart.Content>
