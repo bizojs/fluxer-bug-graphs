@@ -1,18 +1,24 @@
 import type { BugReportData } from "@types"
 
-const USERNAME_DISCRIM_REGEX = /(\w+(#[0-9]{4})?)/g
-const ID_REGEX = /\(([0-9]+)\)$/g
+const USERNAME_DISCRIM_REGEX = /^([^#(]+(?:#\d{4})?)/
+const USERNAME_NO_DISCRIM_REGEX = /^([^#(]+)/
+const ID_REGEX = /\((\d+)\)$/
 
 export class BugReportHelper {
 
     static getUsername(value: string) {
+        let result = value.match(USERNAME_NO_DISCRIM_REGEX)
+        return result ? result[1] : value
+    }
+
+    static getUsernameAndDiscrim(value: string) {
         let result = value.match(USERNAME_DISCRIM_REGEX)
-        return result ? result[0] : value
+        return result ? result[1] : value
     }
 
     static getId(value: string) {
         let result = value.match(ID_REGEX)
-        return result ? result[0] : value
+        return result ? result[1] : value
     }
 
     static getTotalReportsByUser(data: BugReportData[], min: number, approvedOnly: boolean = false) {
@@ -115,6 +121,20 @@ export class BugReportHelper {
         return [
             { key: "Approved", value: approved.length },
             { key: "Not approved", value: notApproved.length },
+        ]
+
+    }
+
+    static getFixRate(data: BugReportData[]) {
+
+        const fixed = data.filter(r => r.fixed === true)
+        const not_fixed = data.filter(r => r.fixed === false)
+        const maybe_fixed = data.filter(r => r.fixed === null)
+
+        return [
+            { key: "Fixed", value: fixed.length },
+            { key: "Not Fixed", value: not_fixed.length },
+            { key: "Undetermined", value: maybe_fixed.length },
         ]
 
     }

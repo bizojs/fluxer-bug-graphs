@@ -23,7 +23,7 @@
     } satisfies ChartConfig
 </script>
 
-<Chart.Root class="md:col-span-4 col-span-1">
+<Chart.Root class="md:col-span-3 col-span-1">
     <Chart.Title
         title="Bug <-> A11y"
         description="The difference between regular bug reports and accessibility reports"

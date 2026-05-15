@@ -8,8 +8,13 @@
 
     let { data }: { data: BugReportData[] } = $props()
 
-    const totalSubmitted = $derived(BugReportHelper.getTotalReportsByUser(data, 2))
+    const totalSubmitted = $derived(BugReportHelper.getTotalReportsByUser(data, 2).map(d => ({
+        ...d,
+        label: d.username
+    })))
     let width = $state(0)
+
+    $inspect(totalSubmitted)
 
     const chartConfig = {
         bug: {
@@ -39,8 +44,7 @@
             labels={settings.state.values ? { offset: 12, value: "total", seriesKey: "bug" } : false}
             orientation="horizontal"
             y="username"
-            x="total"
-            axis={!!settings.state.labels}
+            axis={settings.state.labels ? "y" : false}
             rule
             legend={!!settings.state.legends}
             series={[
@@ -48,7 +52,7 @@
                 { key: "a11y", label: "A11y", color: chartConfig.a11y.color, selected: true },
             ]}
             seriesLayout="overlap"
-            padding={{ right: 16, left: settings.state.labels ? 130 : 0, bottom: settings.state.legends ? 42 : 0 }}
+            padding={{ right: 16, left: settings.state.labels ? 100 : 0, bottom: settings.state.legends ? 42 : 0 }}
             height={500}
             {width}
             props={{
@@ -64,14 +68,12 @@
                         textAnchor: "end",
                         class: "fill-primary! font-semibold!",
                     },
-                    tickLength: 10,
+                    tickLength: 8,
                 },
             }}
         >
-            {#snippet tooltip(context)}
-                <Tooltip
-                    labelFormatter={(v: string) => context.context.data.username}
-                />
+            {#snippet tooltip()}
+                <Tooltip hideLabel />
             {/snippet}
         </BarChart>
     </Chart.Content>
