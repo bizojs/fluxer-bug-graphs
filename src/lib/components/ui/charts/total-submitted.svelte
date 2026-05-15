@@ -4,6 +4,7 @@
     import * as Chart from "@components/charts/base"
     import { settings } from "@localstorage"
     import { BarChart } from "layerchart"
+  import { scaleBand, scaleLinear } from "d3-scale";
 
     const totalSubmitted = $derived(BugReportHelper.getTotalReportsByUser(2).map(d => ({
         ...d,
@@ -32,7 +33,7 @@
         title="Total per user"
         description="Total number of bug reports submitted by each user"
     />
-    <Chart.Content {chartConfig} bind:width>
+    <Chart.Content {chartConfig} bind:width class="h-175">
         <BarChart
             class="mr-auto"
             data={totalSubmitted}
@@ -47,14 +48,14 @@
                 { key: "a11y", label: "A11y", color: chartConfig.a11y.color, selected: true },
             ]}
             seriesLayout="overlap"
-            padding={{ right: 24, left: settings.state.labels ? 100 : 0, bottom: settings.state.legends ? 42 : 0 }}
-            height={500}
+            padding={{ right: 32, left: settings.state.labels ? 100 : 0, bottom: settings.state.legends ? 48 : 0 }}
+            height={700}
             {width}
             props={{
                 bars: {
                     stroke: "none",
                     radius: 6,
-                    height: 20,
+                    height: 18,
                     rounded: "all"
                 },
                 highlight: { area: settings.state.highlights ? true : { fill: "none" } },

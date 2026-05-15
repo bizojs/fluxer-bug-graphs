@@ -8,7 +8,6 @@
     import { LineChart } from "layerchart"
     import { curveBumpX } from "d3-shape"
     import { scaleUtc } from "d3-scale"
-    import { cn } from "@utils"
 
     const dataTypes = [
         { value: "per-day", label: "Per day" },
@@ -54,7 +53,7 @@
     } satisfies ChartConfig
 </script>
 
-<Chart.Root class={cn(settings.state.per_user ? "col-span-1" : "col-span-2")}>
+<Chart.Root class="col-span-1">
     <Chart.Title>
         <div class="flex flex-col">
             <p class="text-lg font-bold">{details.title}</p>
@@ -76,7 +75,7 @@
             </Select.Content>
         </Select.Root>
     </Chart.Title>
-    <Chart.Content {chartConfig} bind:width class={cn(settings.state.per_user ? "h-125" : "h-75")}>
+    <Chart.Content {chartConfig} bind:width class="h-87.5">
         <LineChart
             data={total}
             legend={!!settings.state.legends}
@@ -100,7 +99,7 @@
                 },
             ]}
             class="mr-auto pr-4"
-            height={settings.state.per_user ? 500 : 300}
+            height={350}
             {width}
             props={{
                 spline: { curve: curveBumpX, strokeWidth: 3 },

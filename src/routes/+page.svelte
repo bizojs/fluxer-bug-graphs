@@ -16,15 +16,13 @@
             <ThemeToggle />
         </div>
     </div>
-    <div class="grid md:grid-cols-2 grid-cols-1 w-full gap-5">
-        {#if settings.state.per_user !== false}
-            <Chart.TotalSubmitted />
-        {/if}
-        <Chart.ReportsOverTime />
-    </div>
+    <Chart.ReportsOverTime />
     <div class="grid 2xl:grid-cols-7 md:grid-cols-5 grid-cols-1 gap-5">
         <Chart.BugVsA11y />
         <Chart.ApprovalRate />
         <Chart.FixRate />
     </div>
+    {#if settings.state.per_user !== false}
+        <Chart.TotalSubmitted />
+    {/if}
 </div>
