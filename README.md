@@ -6,6 +6,8 @@ The purpose of this project is to help visualize Fluxer Testers bug report data 
 
 The data has not been provided in this repo due to it containing usernames, discriminators and IDs, however, the project has scripts set up so you can fetch the data yourself, providing that you're a member of the Fluxer Testers community.
 
+This will be eventually hosted and available via https://canary.bizo.dev
+
 ## Framework & Tools:
 - [SvelteKit](https://kit.svelte.dev) - Web framework (using svelte 5 runes)
 - [shadcn/svelte](https://shadcn-svelte.com/) - Component framework / design system built on top of [bits-ui](https://bits-ui.com)
