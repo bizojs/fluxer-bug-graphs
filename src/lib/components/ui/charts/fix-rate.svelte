@@ -10,9 +10,9 @@
 
     const fixRate = $derived(BugReportHelper.getFixRate(data))
     let percentage = $derived.by(() => {
-        let fixed = fixRate.find((item) => item.key.toLowerCase() === "approved")?.value ?? 0
-        let not_fixed = fixRate.find((item) => item.key.toLowerCase() === "not approved")?.value ?? 0
-        return parseInt(((fixed / (fixed + not_fixed)) * 100).toFixed(0))
+        let fixed = fixRate.find((item) => item.key.toLowerCase() === "fixed")?.value ?? 0
+        let not_fixed = fixRate.find((item) => item.key.toLowerCase() === "not fixed")?.value ?? 0
+        return parseFloat(((fixed / (fixed + not_fixed)) * 100).toFixed(1))
     })
     let width = $state(0)
 
@@ -65,7 +65,7 @@
             {#snippet aboveMarks()}
                 {#if settings.state.values}
                     <Text
-                        value="{isNaN(percentage) ? 0 : percentage}%"
+                        value="{percentage}%"
                         textAnchor="middle"
                         verticalAnchor="middle"
                         class="text-2xl! font-bold!"
