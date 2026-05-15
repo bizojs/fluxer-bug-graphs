@@ -2,6 +2,7 @@
     import { LastUpdated } from "@components/last-updated"
     import { ThemeToggle } from "@components/theme-toggle"
     import { Settings } from "@components/settings"
+    import { Warning } from "@components/warning"
     import * as Chart from "@components/charts"
     import { settings } from "@localstorage"
 </script>
@@ -10,6 +11,7 @@
     <div class="flex items-center justify-between">
         <LastUpdated />
         <div class="flex items-center gap-1">
+            <Warning />
             <Settings />
             <ThemeToggle />
         </div>

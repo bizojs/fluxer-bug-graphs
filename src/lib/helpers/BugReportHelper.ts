@@ -142,4 +142,14 @@ export class BugReportHelper {
 
     }
 
+    static getMissingReports() {
+        const ids = new Set(bugReportData.map(r => r.id))
+        const lastId = Math.max(...ids)
+
+        const missing = Array.from({ length: lastId }, (_, i) => i + 1)
+            .filter(id => !ids.has(id))
+
+        return missing
+    }
+
 }

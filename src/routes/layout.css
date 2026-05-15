@@ -147,6 +147,9 @@
     .lc-axis-tick-label, .lc-labels-text {
         @apply select-none cursor-default;
     }
+    code {
+        @apply px-0.5 py-px rounded-lg bg-muted border;
+    }
 }
 
 @utility font-mono {
