@@ -128,7 +128,7 @@
 	--radius-4xl: calc(var(--radius) * 2.6);
     --status-success: var(--status-success);
     --status-danger: var(--status-danger);
-    --status-undetermined: var(--border);
+    --status-undetermined: var(--muted-foreground);
 }
 
 @layer base {
