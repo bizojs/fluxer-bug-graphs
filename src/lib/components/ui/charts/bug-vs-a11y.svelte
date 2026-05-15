@@ -34,7 +34,7 @@
             labels={settings.state.values ? { offset: 12 } : false}
             orientation="horizontal"
             y="type"
-            axis={settings.state.labels ? "y" : false}
+            axis={!!settings.state.labels}
             series={[{ key: "count", label: "Amount" }]}
             padding={{ left: settings.state.labels ? 38 : 0, right: 28 }}
             height={100}
