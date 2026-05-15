@@ -40,6 +40,7 @@
 	--sidebar-ring: oklch(0.708 0 0);
     --canary: oklch(0.7945 0.1709 71.19);
     --a11y: oklch(0.522 0.1771 255.83);
+    --font-sans: "IBM Plex Sans Variable", sans-serif;
     --font-mono: "Berkeley Mono Variable", monospace;
 
     --status-success: oklch(0.8323 0.1716 154.78);

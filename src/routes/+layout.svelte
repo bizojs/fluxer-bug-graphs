@@ -1,5 +1,6 @@
 <script lang="ts">
 	import "./layout.css"
+    import "@fontsource-variable/ibm-plex-sans/wght.css"
     import { ModeWatcher } from "mode-watcher"
 
 	let { children } = $props()

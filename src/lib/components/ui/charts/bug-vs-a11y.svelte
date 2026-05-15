@@ -25,7 +25,7 @@
 
 <Chart.Root class="md:col-span-3 col-span-1">
     <Chart.Title
-        title="Bug <-> A11y"
+        title="Bug vs A11y"
         description="The difference between regular bug reports and accessibility reports"
     />
     <Chart.Content {chartConfig} bind:width class="h-37.5">
