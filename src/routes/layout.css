@@ -141,6 +141,12 @@
 	html {
 		@apply font-sans;
 	}
+    .lc-legend-swatch-button {
+        @apply cursor-pointer!;
+    }
+    .lc-axis-tick-label, .lc-labels-text {
+        @apply select-none cursor-default;
+    }
 }
 
 @utility font-mono {
