@@ -19,7 +19,7 @@
         </div>
     </div>
     <div class="grid md:grid-cols-2 grid-cols-1 w-full gap-5">
-        {#if settings.state.per_user}
+        {#if settings.state.per_user !== false}
             <Chart.TotalSubmitted data={d} />
         {/if}
         <Chart.ReportsOverTime data={d} />

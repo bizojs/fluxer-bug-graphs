@@ -71,7 +71,7 @@
             <div class="flex items-center gap-2 justify-between text-start w-full">
                 <Label for="per-user" class="flex flex-col text-start items-start gap-1 w-full">
                     <p class="font-medium">Per user</p>
-                    <p class="text-xs text-muted-foreground">Show per user graph. This is disabled by default because it feels too much like a "leaderboard" to me.</p>
+                    <p class="text-xs text-muted-foreground">Show per user graph. Some people may see this as a "leaderboard" and want to disable it.</p>
                 </Label>
                 <Switch
                     id="per-user"
