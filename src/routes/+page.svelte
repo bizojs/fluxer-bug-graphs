@@ -24,7 +24,7 @@
         {/if}
         <Chart.ReportsOverTime data={d} />
     </div>
-    <div class="grid md:grid-cols-7 grid-cols-1 gap-5">
+    <div class="grid 2xl:grid-cols-7 md:grid-cols-5 grid-cols-1 gap-5">
         <Chart.BugVsA11y data={d} />
         <Chart.ApprovalRate data={d} />
         <Chart.FixRate data={d} />
