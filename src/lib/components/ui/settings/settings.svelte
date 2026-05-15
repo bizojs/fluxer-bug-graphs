@@ -18,11 +18,6 @@
     }
 </script>
 
-<!-- <Button onclick={() => open = !open} variant="outline" size="icon-sm" class="rounded-2xl">
-    <SettingsIcon class="h-[1.2rem] w-[1.2rem]" />
-    <span class="sr-only">Settings</span>
-</Button> -->
-
 {#if isMobile.current}
     <Drawer.Root bind:open setBackgroundColorOnScale={false}>
         <Drawer.Trigger
