@@ -29,7 +29,7 @@
     <Chart.Title
         title="Approval rate"
         description="How many bug reports are currently approved"
-        tooltip="Approval rate is the percentage of bug reports that are currently approved (still in its respective report channel) and not approved (still in <b>#Approval Queue</b>)"
+        tooltip="Approval rate is the percentage of bug reports that are currently approved (still in its respective report channel) and not approved (still in <code class='text-[11px]'>#Approval Queue</code>)"
     />
     <Chart.Content {chartConfig} bind:width class="h-37.5">
         <PieChart
