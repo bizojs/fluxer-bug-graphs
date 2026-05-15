@@ -2,13 +2,10 @@
     import { type ChartConfig, Tooltip }  from "@components/chart"
     import { BugReportHelper } from "@helpers/BugReportHelper"
     import * as Chart from "@components/charts/base"
-    import type { BugReportData } from "@types"
     import { PieChart, Text } from "layerchart"
     import { settings } from "@localstorage"
 
-    let { data }: { data: BugReportData[] } = $props()
-
-    const fixRate = $derived(BugReportHelper.getFixRate(data))
+    const fixRate = $derived(BugReportHelper.getFixRate())
     let percentage = $derived.by(() => {
         let fixed = fixRate.find((item) => item.key.toLowerCase() === "fixed")?.value ?? 0
         let not_fixed = fixRate.find((item) => item.key.toLowerCase() === "not fixed")?.value ?? 0

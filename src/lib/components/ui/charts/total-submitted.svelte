@@ -1,14 +1,11 @@
 <script lang="ts">
     import { type ChartConfig, Tooltip }  from "@components/chart"
     import { BugReportHelper } from "@helpers/BugReportHelper"
-    import type { BugReportData, Settings } from "@types"
     import * as Chart from "@components/charts/base"
     import { settings } from "@localstorage"
     import { BarChart } from "layerchart"
 
-    let { data }: { data: BugReportData[] } = $props()
-
-    const totalSubmitted = $derived(BugReportHelper.getTotalReportsByUser(data, 2).map(d => ({
+    const totalSubmitted = $derived(BugReportHelper.getTotalReportsByUser(2).map(d => ({
         ...d,
         label: d.username
     })))

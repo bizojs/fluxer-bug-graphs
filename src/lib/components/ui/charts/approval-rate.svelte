@@ -2,13 +2,10 @@
     import { type ChartConfig, Tooltip }  from "@components/chart"
     import { BugReportHelper } from "@helpers/BugReportHelper"
     import * as Chart from "@components/charts/base"
-    import type { BugReportData } from "@types"
     import { PieChart, Text } from "layerchart"
     import { settings } from "@localstorage"
 
-    let { data }: { data: BugReportData[] } = $props()
-
-    const approvalRate = $derived(BugReportHelper.getApprovalRate(data))
+    const approvalRate = $derived(BugReportHelper.getApprovalRate())
     let percentage = $derived.by(() => {
         let approved = approvalRate.find((item) => item.key.toLowerCase() === "approved")?.value ?? 0
         let not_approved = approvalRate.find((item) => item.key.toLowerCase() === "not approved")?.value ?? 0

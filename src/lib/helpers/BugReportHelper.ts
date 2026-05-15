@@ -1,8 +1,11 @@
 import type { BugReportData } from "@types"
+import data from "@generator/data.json"
 
 const USERNAME_DISCRIM_REGEX = /^([^#(]+(?:#\d{4})?)/
 const USERNAME_NO_DISCRIM_REGEX = /^([^#(]+)/
 const ID_REGEX = /\((\d+)\)$/
+
+const bugReportData = data as BugReportData[]
 
 export class BugReportHelper {
 
@@ -21,10 +24,10 @@ export class BugReportHelper {
         return result ? result[1] : value
     }
 
-    static getTotalReportsByUser(data: BugReportData[], min: number, approvedOnly: boolean = false) {
+    static getTotalReportsByUser(min: number, approvedOnly: boolean = false) {
         const map = new Map<string, { bug: number; a11y: number; username: string }>()
 
-        for (const report of data) {
+        for (const report of bugReportData) {
             if (approvedOnly && !report.approved) continue
             const id = this.getId(report.user)
             const username = this.getUsername(report.user)
@@ -45,8 +48,8 @@ export class BugReportHelper {
             .filter(d => d.total > min)
     }
 
-    static getBugVsA11y(data: BugReportData[]) {
-        const reduced = data.reduce((acc, report) => {
+    static getBugVsA11y() {
+        const reduced = bugReportData.reduce((acc, report) => {
             acc[report.type] = (acc[report.type] || 0) + 1
             return acc
         }, {} as Record<string, number>)
@@ -55,13 +58,13 @@ export class BugReportHelper {
         return sorted.map(([type, count]) => ({ type, count }))
     }
 
-    static getReportsByDate(data: BugReportData[]): {
+    static getReportsByDate(): {
         date: Date
         bug: number
         a11y: number
         total: number
     }[] {
-        const approved = data.filter(r => r.approved)
+        const approved = bugReportData.filter(r => r.approved)
         if (approved.length === 0) return []
 
         const map = new Map<string, { bug: number; a11y: number }>()
@@ -92,13 +95,13 @@ export class BugReportHelper {
         return result
     }
 
-    static getBugReportsOverTime(data: BugReportData[]): {
+    static getBugReportsOverTime(): {
         date: Date
         bug: number
         a11y: number
         total: number
     }[] {
-        const byDay = this.getReportsByDate(data)
+        const byDay = this.getReportsByDate()
         let bug = 0, a11y = 0
 
         return byDay.map(d => {
@@ -113,10 +116,10 @@ export class BugReportHelper {
         })
     }
 
-    static getApprovalRate(data: BugReportData[]) {
+    static getApprovalRate() {
 
-        const approved = data.filter(r => r.approved)
-        const notApproved = data.filter(r => !r.approved)
+        const approved = bugReportData.filter(r => r.approved)
+        const notApproved = bugReportData.filter(r => !r.approved)
 
         return [
             { key: "Approved", value: approved.length },
@@ -125,11 +128,11 @@ export class BugReportHelper {
 
     }
 
-    static getFixRate(data: BugReportData[]) {
+    static getFixRate() {
 
-        const fixed = data.filter(r => r.fixed === true)
-        const not_fixed = data.filter(r => r.fixed === false)
-        const maybe_fixed = data.filter(r => r.fixed === null)
+        const fixed = bugReportData.filter(r => r.fixed === true)
+        const not_fixed = bugReportData.filter(r => r.fixed === false)
+        const maybe_fixed = bugReportData.filter(r => r.fixed === null)
 
         return [
             { key: "Fixed", value: fixed.length },

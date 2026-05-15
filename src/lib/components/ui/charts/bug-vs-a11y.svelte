@@ -2,13 +2,10 @@
     import { type ChartConfig, Tooltip }  from "@components/chart"
     import { BugReportHelper } from "@helpers/BugReportHelper"
     import * as Chart from "@components/charts/base"
-    import type { BugReportData } from "@types"
     import { settings } from "@localstorage"
     import { BarChart } from "layerchart"
 
-    let { data }: { data: BugReportData[] } = $props()
-
-    const difference = $derived(BugReportHelper.getBugVsA11y(data))
+    const difference = $derived(BugReportHelper.getBugVsA11y())
     let width = $state(0)
 
     const chartConfig = {

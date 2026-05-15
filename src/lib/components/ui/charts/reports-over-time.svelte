@@ -4,14 +4,11 @@
     import { IsMobile } from "$lib/hooks/is-mobile.svelte"
     import * as Chart from "@components/charts/base"
     import * as Select from "@components/select"
-    import type { BugReportData } from "@types"
     import { settings } from "@localstorage"
     import { LineChart } from "layerchart"
     import { curveBumpX } from "d3-shape"
     import { scaleUtc } from "d3-scale"
     import { cn } from "@utils"
-
-    let { data }: { data: BugReportData[] } = $props()
 
     const dataTypes = [
         { value: "per-day", label: "Per day" },
@@ -39,8 +36,8 @@
 
     const total = $derived(
         selected === "per-day"
-            ? BugReportHelper.getReportsByDate(data)
-            : BugReportHelper.getBugReportsOverTime(data)
+            ? BugReportHelper.getReportsByDate()
+            : BugReportHelper.getBugReportsOverTime()
     )
 
     let width = $state(0)
