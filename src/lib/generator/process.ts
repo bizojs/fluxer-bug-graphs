@@ -21,6 +21,7 @@ function parseReport(msg: any, channelName: ChannelName): BugReportData | null {
     const type: BugReportData["type"] = color === COLORS.a11y ? "a11y" : "bug"
 
     const approved = channelName !== "Approval Queue"
+    const fixed = channelName === "Claimed Fixed" ? null : channelName === "Fixed Bugs"
 
     return {
         id,
@@ -29,7 +30,7 @@ function parseReport(msg: any, channelName: ChannelName): BugReportData | null {
         date: embed.timestamp ?? msg.timestamp,
         type,
         approved,
-        fixed: false
+        fixed
     }
 }
 

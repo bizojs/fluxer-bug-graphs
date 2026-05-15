@@ -5,7 +5,7 @@ export interface BugReportData {
     date: string
     type: "bug" | "a11y"
     approved: boolean
-    fixed: boolean
+    fixed: boolean | null
 }
 
 export interface Settings {

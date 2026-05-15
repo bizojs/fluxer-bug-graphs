@@ -8,7 +8,9 @@ export const TOKEN = "flx_"
 export const CHANNELS = {
     "canary-bug-reports": "",
     "canary-a11y-reports": "",
-    "Approval Queue": ""
+    "Approval Queue": "",
+    "Claimed Fixed": "",
+    "Fixed Bugs": ""
 } as const
 
 
