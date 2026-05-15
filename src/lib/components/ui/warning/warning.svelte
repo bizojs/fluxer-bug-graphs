@@ -16,7 +16,7 @@
 
     let modal = {
         title: "Transparency",
-        description: "Any notable information to note regarding the data",
+        description: "Any notable information regarding bug report data",
     }
 </script>
 
@@ -65,6 +65,19 @@
     <div class="flex-1 text-center flex flex-col gap-10 items-start md:p-0 p-5">
         <div class="flex flex-col gap-4 w-full">
             {@render WarningGroupTitle("Data")}
+            <div class="flex items-start gap-2 w-full">
+                <div class="flex flex-col text-start items-start gap-2 w-full">
+                    <p class="font-medium">Denied reports</p>
+                    <div class="flex w-full flex-col gap-1">
+                        <p class="text-xs text-muted-foreground">
+                            Reports that have been denied and live in the <code class="text-[11px]">#Denied Reports</code> channel are not tracked or displayed.
+                        </p>
+                        <p class="text-xs text-muted-foreground">
+                            The "Approval rate" graph simply tracks which reports remain in the <code class="text-[11px]">#Approval Queue</code> channel as explained in the info tooltip in the top right of the graph.
+                        </p>
+                    </div>
+                </div>
+            </div>
             <div class="flex items-start gap-2 w-full">
                 <div class="flex flex-col text-start items-start gap-2 w-full">
                     <p class="font-medium">Missing data</p>
