@@ -14,8 +14,6 @@
     })))
     let width = $state(0)
 
-    $inspect(totalSubmitted)
-
     const chartConfig = {
         bug: {
             label: "Bug",
