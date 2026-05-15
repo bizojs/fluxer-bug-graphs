@@ -64,6 +64,25 @@
 {#snippet WarningContent()}
     <div class="flex-1 text-center flex flex-col gap-10 items-start md:p-0 p-5">
         <div class="flex flex-col gap-4 w-full">
+            {@render WarningGroupTitle("Source")}
+            <div class="flex items-start gap-2 w-full">
+                <div class="flex flex-col text-start items-start gap-2 w-full">
+                    <p class="font-medium">GitHub</p>
+                    <div class="flex w-full flex-col gap-1">
+                        <p class="text-xs text-muted-foreground">
+                            This project is open source! You can view the source code by clicking the link below.
+                        </p>
+                        <a
+                            href="https://github.com/bizojs/fluxer-bug-graphs"
+                            class="text-xs hover:underline text-sky-400 cursor-pointer transition-all w-fit"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            https://github.com/bizojs/fluxer-bug-graphs
+                        </a>
+                    </div>
+                </div>
+            </div>
             {@render WarningGroupTitle("Data")}
             <div class="flex items-start gap-2 w-full">
                 <div class="flex flex-col text-start items-start gap-2 w-full">
