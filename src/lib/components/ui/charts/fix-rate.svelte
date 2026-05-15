@@ -23,7 +23,7 @@
             color: "var(--status-danger)",
         },
         maybe_fixed: {
-            label: "Undetermined",
+            label: "Claimed Fixed",
             color: "var(--status-undetermined)",
         },
     } satisfies ChartConfig
@@ -31,9 +31,9 @@
 
 <Chart.Root class="md:col-span-2 col-span-1">
     <Chart.Title
-        title="Fix rate"
-        description="How many bug are reported as fixed, not fixed or undetermined"
-        tooltip="Fix rate is determined by:<br />- <b>Fixed</b>: The report has been moved to <code class='text-[11px]'>#Fixed Bugs</code>, <br />- <b>Not Fixed</b>: The report is still in its respective report channel<br />- <b>Undetermined</b>: The report has been moved to <code class='text-[11px]'>#Claimed Fixed</code>"
+        title="Fix progress"
+        description="Breakdown of bug reports by their fix status"
+        tooltip="Fix progress is determined by:<br />- <b>Fixed</b>: The report has been moved to <code class='text-[11px]'>#Fixed Bugs</code><br />- <b>Claimed Fixed</b>: The report has been moved to <code class='text-[11px]'>#Claimed Fixed</code> but not yet verified<br />- <b>Not Fixed</b>: The report is still in its respective report channel"
     />
     <Chart.Content {chartConfig} bind:width class="h-37.5">
         <PieChart

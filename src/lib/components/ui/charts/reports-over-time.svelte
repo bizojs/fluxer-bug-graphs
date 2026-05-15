@@ -81,7 +81,7 @@
             legend={!!settings.state.legends}
             labels={!!settings.state.values}
             points={settings.state.values ? { r: 3, fill: "var(--primary)", stroke: "none" } : false}
-            padding={{ top: 24, right: 24, bottom: settings.state.legends ? 42 : 24, left: 24 }}
+            padding={{ top: 24, right: 24, bottom: settings.state.legends ? 42 : 24, left: 32 }}
             x="date"
             y="total"
             axis={!!settings.state.labels}
@@ -108,6 +108,9 @@
                     format: (v: Date) => {
                         return v.toLocaleDateString("en-US", { month: "short", day: "numeric" })
                     },
+                },
+                yAxis: {
+                    tickLength: 16,
                 },
                 highlight: { points: settings.state.highlights ? { r: 6 } : false },
             }}
