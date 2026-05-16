@@ -8,7 +8,7 @@ module.exports = {
             env: {
                 NODE_ENV: "production",
                 HOST: "0.0.0.0",
-                ORIGIN: "https://canary.bizo.dev",
+                ORIGIN: "https://canary-graphs.bizo.dev",
                 PORT: 4070
             }
         }
