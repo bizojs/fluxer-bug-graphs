@@ -6,7 +6,7 @@ The purpose of this project is to help visualize Fluxer Testers bug report data 
 
 The data has not been provided in this repo due to it containing usernames, discriminators and IDs, however, the project has scripts set up so you can fetch the data yourself, providing that you're a member of the Fluxer Testers community.
 
-This will be eventually hosted and available via https://canary.bizo.dev
+This project is hosted and available via https://canary-graphs.bizo.dev
 
 ## Framework & Tools:
 - [SvelteKit](https://kit.svelte.dev) - Web framework (using svelte 5 runes)
@@ -34,6 +34,7 @@ This project is set up to use `pnpm` - however any other package manager should 
 |-------|-----------|
 |`pnpm dev`|Start the vite dev server for the frontend|
 |`pnpm build`|Build the files ready to be deployed|
+|`pnpm build:data`|Runs `pnpm generate` then `pnpm build`|
 |`pnpm data:generate`|Fetches all the data and maps it to the interface below|
 |`pnpm data:fetch`|Fetches all data as json and dumps it in the configured `DATA_DIR`|
 `pnpm data:process`|Processes all data in the `DATA_DIR` and maps it to the interface below|
@@ -48,6 +49,8 @@ interface BugReportData {
     date: string // ISO date string when the report was created
     type: "bug" | "a11y" // the type of bug
     approved: boolean // whether the bug was approved (no longer in #Approval Queue)
+    approved_timestamp: string | null // when the report was approved if applicable
     fixed: boolean | null // true: report in #Fixed Bugs | false: report in #canary/a11y-bug-report | null: report in #Claimed Fixed
+    fixed_timestamp: string | null // when the report was fixed if applicable
 }
 ```
