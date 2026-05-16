@@ -18,13 +18,13 @@
             label: "Not Fixed",
             color: "var(--status-success)",
         },
-        not_fixed: {
-            label: "Fixed",
-            color: "var(--status-danger)",
-        },
         maybe_fixed: {
             label: "Claimed Fixed",
             color: "var(--status-undetermined)",
+        },
+        not_fixed: {
+            label: "Fixed",
+            color: "var(--status-danger)",
         },
     } satisfies ChartConfig
 </script>

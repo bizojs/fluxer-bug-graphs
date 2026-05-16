@@ -136,8 +136,8 @@ export class BugReportHelper {
 
         return [
             { key: "Fixed", value: fixed.length },
-            { key: "Not Fixed", value: not_fixed.length },
             { key: "Claimed Fixed", value: maybe_fixed.length },
+            { key: "Not Fixed", value: not_fixed.length },
         ]
 
     }
