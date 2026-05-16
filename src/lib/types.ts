@@ -2,10 +2,12 @@ export interface BugReportData {
     id: number
     message_id: string
     user: string
-    date: string
+    created: string
     type: "bug" | "a11y"
     approved: boolean
+    approved_timestamp: string | null
     fixed: boolean | null
+    fixed_timestamp: string | null
 }
 
 export interface Settings {

@@ -27,10 +27,12 @@ function parseReport(msg: any, channelName: ChannelName): BugReportData | null {
         id,
         message_id: msg.id,
         user,
-        date: embed.timestamp ?? msg.timestamp,
+        created: embed.timestamp ?? msg.timestamp,
         type,
         approved,
-        fixed
+        approved_timestamp: approved ? msg.timestamp : null,
+        fixed,
+        fixed_timestamp: fixed ? msg.timestamp : null,
     }
 }
 
