@@ -64,25 +64,24 @@ export class BugReportHelper {
         a11y: number
         total: number
     }[] {
-        const approved = bugReportData.filter(r => r.approved)
-        if (approved.length === 0) return []
+        if (bugReportData.length === 0) return []
 
         const map = new Map<string, { bug: number; a11y: number }>()
 
-        for (const report of approved) {
-            const day = report.date.slice(0, 10)
+        for (const report of bugReportData) {
+            const day = report.created.slice(0, 10)
             const entry = map.get(day) ?? { bug: 0, a11y: 0 }
             entry[report.type]++
             map.set(day, entry)
         }
 
-        const earliest = approved.reduce((min, r) => r.date < min ? r.date : min, approved[0].date)
+        const earliest = bugReportData.reduce((min, r) => r.created < min ? r.created : min, bugReportData[0].created)
         const start = new Date(earliest.slice(0, 10))
         const today = new Date()
         const result = []
 
         for (let d = new Date(start); d <= today; d.setDate(d.getDate() + 1)) {
-            const day = d.toISOString().split("T")[0]
+            const day = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`
             const counts = map.get(day) ?? { bug: 0, a11y: 0 }
             result.push({
                 date: new Date(day),
