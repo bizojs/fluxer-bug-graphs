@@ -32,7 +32,7 @@
 
     const total = $derived(BugReportHelper.getTotalReportsByUser(2, selected as "bug" | "a11y"))
     let width = $state(0)
-    let height = $derived(total.length * 30)
+    let height = $derived(total.length * (selected === "bug" ? 30 : 40))
 
     const chartConfig = {
         bug: {
