@@ -50,7 +50,6 @@
             height={150}
             {width}
             props={{
-                highlight: { area: { fill: "none" } },
                 yAxis: {
                     tickLabelProps: {
                         textAnchor: "start",

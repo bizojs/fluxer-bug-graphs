@@ -59,7 +59,6 @@
                     height: 24,
                     rounded: "all"
                 },
-                highlight: { area: settings.state.highlights ? true : { fill: "none" } },
                 yAxis: {
                     tickLabelProps: {
                         dx: -12,
