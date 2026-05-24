@@ -35,7 +35,7 @@ This project is set up to use `pnpm` - however any other package manager should 
 |`pnpm dev`|Start the vite dev server for the frontend|
 |`pnpm build`|Build the files ready to be deployed|
 |`pnpm build:data`|Runs `pnpm data:generate` then `pnpm build`|
-|`pnpm data:generate`|Fetches all the data and maps it to the interface below|
+|`pnpm data:generate`|Fetches all data as json and maps it to the interface below|
 |`pnpm data:fetch`|Fetches all data as json and dumps it in the configured `DATA_DIR`|
 `pnpm data:process`|Processes all data in the `DATA_DIR` and maps it to the interface below|
 
@@ -52,5 +52,6 @@ interface BugReportData {
     approved_timestamp: string | null // when the report was approved if applicable
     fixed: boolean | null // true: report in #Fixed Bugs | false: report in #canary/a11y-bug-report | null: report in #Claimed Fixed
     fixed_timestamp: string | null // when the report was fixed if applicable
+    denied: boolean // whether the bug report is deined (in #Denied Reports)
 }
 ```
