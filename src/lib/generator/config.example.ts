@@ -10,7 +10,8 @@ export const CHANNELS = {
     "canary-a11y-reports": "",
     "Approval Queue": "",
     "Claimed Fixed": "",
-    "Fixed Bugs": ""
+    "Fixed Bugs": "",
+    "Denied Reports": ""
 } as const
 
 

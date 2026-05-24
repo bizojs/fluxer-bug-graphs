@@ -24,15 +24,17 @@ export class BugReportHelper {
         return result ? result[1] : value
     }
 
-    static getTotalReportsByUser(min: number, approvedOnly: boolean = false) {
-        const map = new Map<string, { bug: number; a11y: number; username: string }>()
+    static getTotalReportsByUser(min: number, type: "bug" | "a11y", approvedOnly: boolean = false) {
+        const map = new Map<string, { count: number; username: string }>()
 
         for (const report of bugReportData) {
             if (approvedOnly && !report.approved) continue
+            if (report.denied) continue
+            if (report.type !== type) continue
             const id = this.getId(report.user)
             const username = this.getUsername(report.user)
-            const entry = map.get(id) ?? { bug: 0, a11y: 0, username }
-            entry[report.type]++
+            const entry = map.get(id) ?? { count: 0, username }
+            entry.count++
             entry.username = username
             map.set(id, entry)
         }
@@ -40,19 +42,19 @@ export class BugReportHelper {
         return [...map.entries()]
             .map(([_, counts]) => ({
                 username: counts.username,
-                bug: counts.bug,
-                a11y: counts.a11y,
-                total: counts.bug + counts.a11y,
+                count: counts.count,
             }))
-            .sort((a, b) => b.total - a.total)
-            .filter(d => d.total > min)
+            .sort((a, b) => b.count - a.count)
+            .filter(d => d.count > min)
     }
 
     static getBugVsA11y() {
-        const reduced = bugReportData.reduce((acc, report) => {
-            acc[report.type] = (acc[report.type] || 0) + 1
-            return acc
-        }, {} as Record<string, number>)
+        const reduced = bugReportData
+            .filter(r => !r.denied)
+            .reduce((acc, report) => {
+                acc[report.type] = (acc[report.type] || 0) + 1
+                return acc
+            }, {} as Record<string, number>)
         const sorted = Object.entries(reduced)
             .sort((a, b) => b[1] - a[1])
         return sorted.map(([type, count]) => ({ type, count }))
@@ -69,6 +71,7 @@ export class BugReportHelper {
         const map = new Map<string, { bug: number; a11y: number }>()
 
         for (const report of bugReportData) {
+            if (report.denied) continue
             const day = report.created.slice(0, 10)
             const entry = map.get(day) ?? { bug: 0, a11y: 0 }
             entry[report.type]++
@@ -117,8 +120,9 @@ export class BugReportHelper {
 
     static getApprovalRate() {
 
-        const approved = bugReportData.filter(r => r.approved)
-        const notApproved = bugReportData.filter(r => !r.approved)
+        const notDenied = bugReportData.filter(r => !r.denied)
+        const approved = notDenied.filter(r => r.approved)
+        const notApproved = notDenied.filter(r => !r.approved)
 
         return [
             { key: "Approved", value: approved.length },
@@ -129,9 +133,10 @@ export class BugReportHelper {
 
     static getFixRate() {
 
-        const fixed = bugReportData.filter(r => r.fixed === true)
-        const not_fixed = bugReportData.filter(r => r.fixed === false)
-        const maybe_fixed = bugReportData.filter(r => r.fixed === null)
+        const notDenied = bugReportData.filter(r => !r.denied)
+        const fixed = notDenied.filter(r => r.fixed === true)
+        const not_fixed = notDenied.filter(r => r.fixed === false)
+        const maybe_fixed = notDenied.filter(r => r.fixed === null)
 
         return [
             { key: "Fixed", value: fixed.length },
@@ -139,6 +144,26 @@ export class BugReportHelper {
             { key: "Not Fixed", value: not_fixed.length },
         ]
 
+    }
+
+    static getReportStates() {
+        const waiting_approval = bugReportData.filter(r => !r.approved && !r.denied)
+        const denied           = bugReportData.filter(r => r.denied)
+        const confirmed        = bugReportData.filter(r => r.approved && !r.denied && r.fixed === false)
+        const maybe_fixed      = bugReportData.filter(r => r.approved && !r.denied && r.fixed === null)
+        const fixed            = bugReportData.filter(r => r.approved && !r.denied && r.fixed === true)
+
+        const total = waiting_approval.length + denied.length + confirmed.length
+                    + maybe_fixed.length + fixed.length
+        console.assert(total === bugReportData.length, `Mismatch: ${total} vs ${bugReportData.length}`)
+
+        return [
+            { key: "Waiting Approval", value: waiting_approval.length },
+            { key: "Confirmed", value: confirmed.length },
+            { key: "Claimed Fixed", value: maybe_fixed.length },
+            { key: "Fixed", value: fixed.length },
+            { key: "Denied", value: denied.length },
+        ]
     }
 
     static getMissingReports() {

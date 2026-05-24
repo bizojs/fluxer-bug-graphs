@@ -21,6 +21,7 @@ function parseReport(msg: any, channelName: ChannelName): BugReportData | null {
     const type: BugReportData["type"] = color === COLORS.a11y ? "a11y" : "bug"
 
     const approved = channelName !== "Approval Queue"
+    const denied = channelName === "Denied Reports"
     const fixed = channelName === "Claimed Fixed" ? null : channelName === "Fixed Bugs"
 
     return {
@@ -33,6 +34,7 @@ function parseReport(msg: any, channelName: ChannelName): BugReportData | null {
         approved_timestamp: approved ? msg.timestamp : null,
         fixed,
         fixed_timestamp: fixed ? msg.timestamp : null,
+        denied
     }
 }
 

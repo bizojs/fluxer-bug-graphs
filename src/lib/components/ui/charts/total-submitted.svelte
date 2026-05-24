@@ -1,16 +1,38 @@
 <script lang="ts">
     import { type ChartConfig, Tooltip }  from "@components/chart"
     import { BugReportHelper } from "@helpers/BugReportHelper"
+    import { IsMobile } from "$lib/hooks/is-mobile.svelte"
     import * as Chart from "@components/charts/base"
+    import * as Select from "@components/select"
     import { settings } from "@localstorage"
     import { BarChart } from "layerchart"
-  import { scaleBand, scaleLinear } from "d3-scale";
 
-    const totalSubmitted = $derived(BugReportHelper.getTotalReportsByUser(2).map(d => ({
-        ...d,
-        label: d.username
-    })))
+    const dataTypes = [
+        { value: "bug", label: "Bug" },
+        { value: "a11y", label: "A11y" }
+    ]
+
+    let selected = $state("bug")
+    let isMobile = new IsMobile()
+
+    let details = $derived(
+        selected === "bug"
+            ? {
+                title: "Total per user",
+                description: "Total number of normal bug reports submitted by each user"
+            }
+            : {
+                title: "Total per user",
+                description: "Total number of a11y bug reports submitted by each user"
+            }
+    )
+    const triggerContent = $derived(
+        dataTypes.find((f) => f.value === selected)?.label ?? "Bug"
+    )
+
+    const total = $derived(BugReportHelper.getTotalReportsByUser(2, selected as "bug" | "a11y"))
     let width = $state(0)
+    let height = $derived(total.length * 30)
 
     const chartConfig = {
         bug: {
@@ -29,27 +51,42 @@
 </script>
 
 <Chart.Root class="col-span-1">
-    <Chart.Title
-        title="Total per user"
-        description="Total number of bug reports submitted by each user"
-    />
-    <Chart.Content {chartConfig} bind:width class="h-175">
+    <Chart.Title>
+        <div class="flex flex-col">
+            <p class="text-lg font-bold">{details.title}</p>
+            <p class="text-sm text-muted-foreground">{details.description}</p>
+        </div>
+        <Select.Root type="single" name="data-type" bind:value={selected}>
+            <Select.Trigger class="w-fit text-xs" size="sm">
+                {triggerContent}
+            </Select.Trigger>
+            <Select.Content align={isMobile.current ? "start" : "end"} class="min-w-38">
+                {#each dataTypes as type (type.value)}
+                    <Select.Item
+                        value={type.value}
+                        label={type.label}
+                    >
+                        {type.label}
+                    </Select.Item>
+                {/each}
+            </Select.Content>
+        </Select.Root>
+    </Chart.Title>
+    <Chart.Content {chartConfig} bind:width style="height: {height + 20}px;">
         <BarChart
             class="mr-auto"
-            data={totalSubmitted}
-            labels={settings.state.values ? { offset: 12, value: "total", seriesKey: "bug" } : false}
+            data={total}
+            labels={settings.state.values ? { offset: 8, value: "count", seriesKey: "count" } : false}
             orientation="horizontal"
             y="username"
             axis={!!settings.state.labels}
             rule
             legend={!!settings.state.legends}
             series={[
-                { key: "bug", label: "Bug", color: chartConfig.bug.color, selected: true },
-                { key: "a11y", label: "A11y", color: chartConfig.a11y.color, selected: true },
+                { key: "count", label: "Count", color: selected === "bug" ? chartConfig.bug.color : chartConfig.a11y.color, selected: true }
             ]}
-            seriesLayout="overlap"
             padding={{ right: 32, left: settings.state.labels ? 100 : 0, bottom: settings.state.legends ? 48 : 0 }}
-            height={700}
+            {height}
             {width}
             props={{
                 bars: {

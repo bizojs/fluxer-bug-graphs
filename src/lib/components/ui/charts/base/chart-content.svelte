@@ -7,10 +7,11 @@
         children: Snippet
         chartConfig: Chart.ChartConfig
         class?: string
+        style?: string
         width: number
     }
 
-    let { children, chartConfig, class: className, width = $bindable() }: ChartContentProps = $props()
+    let { children, chartConfig, class: className, width = $bindable(), style }: ChartContentProps = $props()
 
     let containerEl: HTMLElement | null = $state(null)
 
@@ -25,7 +26,7 @@
 </script>
 
 <div bind:this={containerEl}>
-    <Chart.Container config={chartConfig} class={cn(className, "w-fit")}>
+    <Chart.Container config={chartConfig} class={cn(className, "w-fit")} {style}>
         {@render children?.()}
     </Chart.Container>
 </div>

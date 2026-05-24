@@ -8,6 +8,7 @@ export interface BugReportData {
     approved_timestamp: string | null
     fixed: boolean | null
     fixed_timestamp: string | null
+    denied: boolean
 }
 
 export interface Settings {

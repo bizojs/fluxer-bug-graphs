@@ -86,19 +86,6 @@
             {@render WarningGroupTitle("Data")}
             <div class="flex items-start gap-2 w-full">
                 <div class="flex flex-col text-start items-start gap-2 w-full">
-                    <p class="font-medium">Denied reports</p>
-                    <div class="flex w-full flex-col gap-1">
-                        <p class="text-xs text-muted-foreground">
-                            Reports that have been denied and live in the <code class="text-[11px]">#Denied Reports</code> channel are not tracked or displayed.
-                        </p>
-                        <p class="text-xs text-muted-foreground">
-                            The "Approval rate" graph simply tracks which reports remain in the <code class="text-[11px]">#Approval Queue</code> channel as explained in the info tooltip in the top right of the graph.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="flex items-start gap-2 w-full">
-                <div class="flex flex-col text-start items-start gap-2 w-full">
                     <p class="font-medium">Missing data</p>
                     <p class="text-xs text-muted-foreground">
                         The following report IDs are missing:
@@ -115,7 +102,7 @@
                         </button>
                     </div>
                     <p class="text-xs text-muted-foreground">
-                        This is likely due to the bug report being denied or a test report by the Fluxer Testers staff.
+                        This is likely due to the bug report being deleted, a test report by the Fluxer Testers staff or some other unknown variable.
                     </p>
                 </div>
             </div>
