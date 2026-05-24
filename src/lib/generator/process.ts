@@ -57,7 +57,8 @@ export async function processAll() {
         for (const msg of Object.values(raw)) {
             const report = parseReport(msg, channelName)
             if (!report) continue
-            reports[report.message_id] = report
+            if (reports[report.id]) continue
+            reports[report.id] = report
             count++
         }
 

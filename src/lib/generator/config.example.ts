@@ -6,12 +6,12 @@ You only need to fill out the TOKEN and CHANNELS options below:
 export const TOKEN = "flx_"
 
 export const CHANNELS = {
+    "Denied Reports": "",
+    "Fixed Bugs": "",
+    "Claimed Fixed": "",
+    "Approval Queue": "",
     "canary-bug-reports": "",
     "canary-a11y-reports": "",
-    "Approval Queue": "",
-    "Claimed Fixed": "",
-    "Fixed Bugs": "",
-    "Denied Reports": ""
 } as const
 
 
