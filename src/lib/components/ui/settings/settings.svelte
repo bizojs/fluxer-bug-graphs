@@ -64,9 +64,9 @@
         <div class="flex flex-col gap-4 w-full">
             {@render SettingsGroupTitle("Graphs")}
             <div class="flex items-center gap-2 justify-between text-start w-full">
-                <Label for="per-user" class="flex flex-col text-start items-start gap-1 w-full">
-                    <p class="font-medium">Per user</p>
-                    <p class="text-xs text-muted-foreground">Show per user graph. Some people may see this as a "leaderboard" and want to disable it.</p>
+                <Label for="per-user" class="flex flex-col text-start items-start gap-0 w-full">
+                    <p class="text-base font-semibold">Per user</p>
+                    <p class="text-sm text-muted-foreground">Show per user graph. Some people may see this as a "leaderboard" and want to disable it.</p>
                 </Label>
                 <Switch
                     id="per-user"
@@ -79,9 +79,9 @@
         <div class="flex flex-col gap-4 w-full">
             {@render SettingsGroupTitle("Interface")}
             <div class="flex items-center gap-2 justify-between text-start w-full">
-                <Label for="show-labels" class="flex flex-col text-start items-start gap-1 w-full">
-                    <p class="font-medium">Labels</p>
-                    <p class="text-xs text-muted-foreground">Display X and Y labels on graphs</p>
+                <Label for="show-labels" class="flex flex-col text-start items-start gap-0 w-full">
+                    <p class="text-base font-semibold">Labels</p>
+                    <p class="text-sm text-muted-foreground">Display X and Y labels on graphs</p>
                 </Label>
                 <Switch
                     id="show-labels"
@@ -91,9 +91,9 @@
                 />
             </div>
             <div class="flex items-center gap-2 justify-between text-start w-full">
-                <Label for="show-values" class="flex flex-col text-start items-start gap-1 w-full">
-                    <p class="font-medium">Values</p>
-                    <p class="text-xs text-muted-foreground">Display number values across graphs</p>
+                <Label for="show-values" class="flex flex-col text-start items-start gap-0 w-full">
+                    <p class="text-base font-semibold">Values</p>
+                    <p class="text-sm text-muted-foreground">Display number values across graphs</p>
                 </Label>
                 <Switch
                     id="show-values"
@@ -103,9 +103,9 @@
                 />
             </div>
             <div class="flex items-center gap-2 justify-between text-start w-full">
-                <Label for="show-legends" class="flex flex-col text-start items-start gap-1 w-full">
-                    <p class="font-medium">Legends</p>
-                    <p class="text-xs text-muted-foreground">Show color legends at the bottom of graphs</p>
+                <Label for="show-legends" class="flex flex-col text-start items-start gap-0 w-full">
+                    <p class="text-base font-semibold">Legends</p>
+                    <p class="text-sm text-muted-foreground">Show color legends at the bottom of graphs</p>
                 </Label>
                 <Switch
                     id="show-legends"
@@ -115,9 +115,9 @@
                 />
             </div>
             <div class="flex items-center gap-2 justify-between text-start w-full">
-                <Label for="show-highlights" class="flex flex-col text-start items-start gap-1 w-full">
-                    <p class="font-medium">Highlights</p>
-                    <p class="text-xs text-muted-foreground">Highlight bars when hovering over graphs</p>
+                <Label for="show-highlights" class="flex flex-col text-start items-start gap-0 w-full">
+                    <p class="text-base font-semibold">Highlights</p>
+                    <p class="text-sm text-muted-foreground">Highlight bars when hovering over graphs</p>
                 </Label>
                 <Switch
                     id="show-highlights"

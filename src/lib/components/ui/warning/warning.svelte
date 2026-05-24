@@ -67,14 +67,14 @@
             {@render WarningGroupTitle("Source")}
             <div class="flex items-start gap-2 w-full">
                 <div class="flex flex-col text-start items-start gap-2 w-full">
-                    <p class="font-medium">GitHub</p>
+                    <p class="text-base font-medium">GitHub</p>
                     <div class="flex w-full flex-col gap-1">
-                        <p class="text-xs text-muted-foreground">
+                        <p class="text-sm text-muted-foreground">
                             This project is open source! You can view the source code by clicking the link below.
                         </p>
                         <a
                             href="https://github.com/bizojs/fluxer-bug-graphs"
-                            class="text-xs hover:underline text-sky-400 cursor-pointer transition-all w-fit"
+                            class="text-sm hover:underline text-sky-400 cursor-pointer transition-all w-fit"
                             target="_blank"
                             rel="noreferrer"
                         >
@@ -108,13 +108,13 @@
                             <code class="text-[11px]">#{id}</code>
                         {/each}
                         <button
-                            class="text-xs hover:underline text-sky-400 cursor-pointer transition-all"
+                            class="text-sm hover:underline text-sky-400 cursor-pointer transition-all"
                             onclick={() => (showMore = !showMore)}
                         >
                             Show {showMore ? "less" : `${missingIds.length - showing.length} more`}
                         </button>
                     </div>
-                    <p class="text-xs text-muted-foreground">
+                    <p class="text-sm text-muted-foreground">
                         This is likely due to the bug report being deleted, a test report by the Fluxer Testers staff or some other unknown variable.
                     </p>
                 </div>
