@@ -86,8 +86,21 @@
             {@render WarningGroupTitle("Data")}
             <div class="flex items-start gap-2 w-full">
                 <div class="flex flex-col text-start items-start gap-2 w-full">
-                    <p class="font-medium">Missing data</p>
-                    <p class="text-xs text-muted-foreground">
+                    <p class="text-base font-medium">Data accuracy</p>
+                    <div class="flex flex-col w-full">
+                        <p class="text-sm text-muted-foreground">
+                            While care has been taken to ensure data is processed and displayed correctly, some inaccuracies in aggregation or processing may exist.
+                        </p>
+                        <p class="text-sm text-muted-foreground">
+                            Treat this data as a best-effort overview rather than an authoritative source.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-start gap-2 w-full">
+                <div class="flex flex-col text-start items-start gap-2 w-full">
+                    <p class="text-base font-medium">Missing data</p>
+                    <p class="text-sm text-muted-foreground">
                         The following report IDs are missing:
                     </p>
                     <div class="flex items-center gap-1 flex-wrap">
