@@ -15,12 +15,6 @@
 		"data:fetch": "tsx src/lib/generator/index.ts --fetch",
 		"data:process": "tsx src/lib/generator/index.ts --process"
 	},
-	"pnpm": {
-		"onlyBuiltDependencies": [
-			"@tailwindcss/oxide",
-			"esbuild"
-		]
-	},
 	"devDependencies": {
 		"@fontsource-variable/inter": "^5.2.8",
 		"@internationalized/date": "^3.12.0",
