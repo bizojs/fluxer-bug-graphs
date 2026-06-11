@@ -1,6 +1,5 @@
 <script lang="ts">
     import * as Chart from "@components/charts"
-    import { settings } from "@localstorage"
     import { Nav } from "@components/nav"
 </script>
 
@@ -16,8 +15,5 @@
             <Chart.ApprovalRate />
             <Chart.FixRate />
         </div>
-        {#if settings.state.per_user !== false}
-            <Chart.TotalSubmitted />
-        {/if}
     </div>
 </div>

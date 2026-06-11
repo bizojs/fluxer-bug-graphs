@@ -1,52 +1,9 @@
 import type { BugReportData } from "@types"
 import data from "@generator/data.json"
 
-const USERNAME_DISCRIM_REGEX = /^([^#(]+(?:#\d{4})?)/
-const USERNAME_NO_DISCRIM_REGEX = /^([^#(]+)/
-const ID_REGEX = /\((\d+)\)$/
-
 const bugReportData = data as BugReportData[]
 
 export class BugReportHelper {
-
-    static getUsername(value: string) {
-        let result = value.match(USERNAME_NO_DISCRIM_REGEX)
-        return result ? result[1] : value
-    }
-
-    static getUsernameAndDiscrim(value: string) {
-        let result = value.match(USERNAME_DISCRIM_REGEX)
-        return result ? result[1] : value
-    }
-
-    static getId(value: string) {
-        let result = value.match(ID_REGEX)
-        return result ? result[1] : value
-    }
-
-    static getTotalReportsByUser(min: number, type: BugReportData["type"], approvedOnly: boolean = false) {
-        const map = new Map<string, { count: number; username: string }>()
-
-        for (const report of bugReportData) {
-            if (approvedOnly && !report.approved) continue
-            if (report.denied) continue
-            if (report.type !== type) continue
-            const id = this.getId(report.user)
-            const username = this.getUsername(report.user)
-            const entry = map.get(id) ?? { count: 0, username }
-            entry.count++
-            entry.username = username
-            map.set(id, entry)
-        }
-
-        return [...map.entries()]
-            .map(([_, counts]) => ({
-                username: counts.username,
-                count: counts.count,
-            }))
-            .sort((a, b) => b.count - a.count)
-            .filter(d => d.count > min)
-    }
 
     static getReportsByType() {
         const reduced = bugReportData

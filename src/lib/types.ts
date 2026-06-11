@@ -1,7 +1,5 @@
 export interface BugReportData {
     id: number
-    message_id: string
-    user: string
     created: string
     type: "bug" | "a11y" | "video"
     approved: boolean
@@ -16,7 +14,6 @@ export interface Settings {
     legends: boolean
     values: boolean
     highlights: boolean
-    per_user: boolean
 }
 
 export interface ChartTotalByUser {

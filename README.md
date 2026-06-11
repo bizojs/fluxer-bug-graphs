@@ -44,8 +44,6 @@ This project is set up to use `pnpm` - however any other package manager should 
 ```ts
 interface BugReportData {
     id: number // the ID of the report (the # in any given embed footer)
-    message_id: string // the ID of the message containing the bug report
-    user: string // the user that sent the report in the format: "name#discrim (id)"
     date: string // ISO date string when the report was created
     type: "bug" | "a11y" | "video" // the type of bug
     approved: boolean // whether the bug was approved (no longer in #Approval Queue)

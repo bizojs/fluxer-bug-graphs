@@ -29,6 +29,5 @@ export const settings = createPersistedStore<Settings>("settings", {
     labels: true,
     legends: true,
     values: true,
-    highlights: true,
-    per_user: true
+    highlights: true
 })

@@ -62,21 +62,6 @@
 {#snippet SettingsContent()}
     <div class="flex-1 text-center flex flex-col gap-10 items-start md:p-0 p-5">
         <div class="flex flex-col gap-4 w-full">
-            {@render SettingsGroupTitle("Graphs")}
-            <div class="flex items-center gap-2 justify-between text-start w-full">
-                <Label for="per-user" class="flex flex-col text-start items-start gap-0 w-full">
-                    <p class="text-base font-semibold">Per user</p>
-                    <p class="text-sm text-muted-foreground">Show per user graph. Some people may see this as a "leaderboard" and want to disable it.</p>
-                </Label>
-                <Switch
-                    id="per-user"
-                    checked={settings.state.per_user ?? false}
-                    onCheckedChange={(value: boolean) => settings.set("per_user", value)}
-                    disabled={settings.loading}
-                />
-            </div>
-        </div>
-        <div class="flex flex-col gap-4 w-full">
             {@render SettingsGroupTitle("Interface")}
             <div class="flex items-center gap-2 justify-between text-start w-full">
                 <Label for="show-labels" class="flex flex-col text-start items-start gap-0 w-full">
