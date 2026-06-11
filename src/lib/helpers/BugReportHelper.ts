@@ -24,7 +24,7 @@ export class BugReportHelper {
         return result ? result[1] : value
     }
 
-    static getTotalReportsByUser(min: number, type: "bug" | "a11y", approvedOnly: boolean = false) {
+    static getTotalReportsByUser(min: number, type: BugReportData["type"], approvedOnly: boolean = false) {
         const map = new Map<string, { count: number; username: string }>()
 
         for (const report of bugReportData) {
@@ -48,7 +48,7 @@ export class BugReportHelper {
             .filter(d => d.count > min)
     }
 
-    static getBugVsA11y() {
+    static getReportsByType() {
         const reduced = bugReportData
             .filter(r => !r.denied)
             .reduce((acc, report) => {
@@ -64,16 +64,17 @@ export class BugReportHelper {
         date: Date
         bug: number
         a11y: number
+        video: number
         total: number
     }[] {
         if (bugReportData.length === 0) return []
 
-        const map = new Map<string, { bug: number; a11y: number }>()
+        const map = new Map<string, { bug: number; a11y: number, video: number }>()
 
         for (const report of bugReportData) {
             if (report.denied) continue
             const day = report.created.slice(0, 10)
-            const entry = map.get(day) ?? { bug: 0, a11y: 0 }
+            const entry = map.get(day) ?? { bug: 0, a11y: 0, video: 0 }
             entry[report.type]++
             map.set(day, entry)
         }
@@ -85,11 +86,12 @@ export class BugReportHelper {
 
         for (let d = new Date(start); d <= today; d.setDate(d.getDate() + 1)) {
             const day = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`
-            const counts = map.get(day) ?? { bug: 0, a11y: 0 }
+            const counts = map.get(day) ?? { bug: 0, a11y: 0, video: 0 }
             result.push({
                 date: new Date(day),
                 bug: counts.bug,
                 a11y: counts.a11y,
+                video: counts.video,
                 total: counts.bug + counts.a11y,
             })
         }
@@ -101,18 +103,21 @@ export class BugReportHelper {
         date: Date
         bug: number
         a11y: number
+        video: number
         total: number
     }[] {
         const byDay = this.getReportsByDate()
-        let bug = 0, a11y = 0
+        let bug = 0, a11y = 0, video = 0
 
         return byDay.map(d => {
             bug += d.bug
             a11y += d.a11y
+            video += d.video
             return {
                 date: d.date,
                 bug,
                 a11y,
+                video,
                 total: bug + a11y,
             }
         })

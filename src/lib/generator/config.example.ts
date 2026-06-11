@@ -12,6 +12,7 @@ export const CHANNELS = {
     "Approval Queue": "",
     "canary-bug-reports": "",
     "canary-a11y-reports": "",
+    "voice-and-video-reports": "",
 } as const
 
 
@@ -23,7 +24,8 @@ export type ChannelName = keyof typeof CHANNELS
 
 export const COLORS = {
     bug: 16754176,
-    a11y: 26316
+    a11y: 26316,
+    video: 14738196
 } as const
 
 export const API_BASE = "https://api.fluxer.app"

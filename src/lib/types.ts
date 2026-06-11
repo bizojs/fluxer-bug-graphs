@@ -3,7 +3,7 @@ export interface BugReportData {
     message_id: string
     user: string
     created: string
-    type: "bug" | "a11y"
+    type: "bug" | "a11y" | "video"
     approved: boolean
     approved_timestamp: string | null
     fixed: boolean | null

@@ -40,6 +40,7 @@
 	--sidebar-ring: oklch(0.708 0 0);
     --canary: oklch(0.7945 0.1709 71.19);
     --a11y: oklch(0.522 0.1771 255.83);
+    --video: oklch(0.88 0.19 110.72);
     --font-sans: "IBM Plex Sans Variable", sans-serif;
     --font-mono: "Berkeley Mono Variable", monospace;
 
@@ -117,6 +118,7 @@
 	--color-background: var(--background);
     --color-canary: var(--canary);
     --color-a11y: var(--a11y);
+    --color-video: var(--video);
     --color-approved: var(--approved);
     --color-not-approved: var(--not-approved);
 	--radius-sm: calc(var(--radius) * 0.6);

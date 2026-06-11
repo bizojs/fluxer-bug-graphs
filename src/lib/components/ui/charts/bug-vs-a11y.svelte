@@ -5,7 +5,7 @@
     import { settings } from "@localstorage"
     import { BarChart } from "layerchart"
 
-    const difference = $derived(BugReportHelper.getBugVsA11y())
+    const difference = $derived(BugReportHelper.getReportsByType())
     let width = $state(0)
 
     const chartConfig = {
@@ -16,14 +16,18 @@
         a11y: {
             label: "A11y",
             color: "var(--a11y)",
+        },
+        video: {
+            label: "Video",
+            color: "var(--video)",
         }
     } satisfies ChartConfig
 </script>
 
 <Chart.Root class="col-span-1">
     <Chart.Title
-        title="Bug vs A11y"
-        description="The difference between regular bug reports and accessibility reports"
+        title="Report type"
+        description="The difference between regular bug reports, accessibility, and voice and video reports"
     />
     <Chart.Content {chartConfig} bind:width class="h-37.5">
         <BarChart

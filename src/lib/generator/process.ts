@@ -4,6 +4,15 @@ import type { BugReportData } from "@types"
 import fs from "fs/promises"
 import path from "path"
 
+function getReportType(color: Number): BugReportData["type"] {
+    switch (color) {
+        case COLORS.a11y: return "a11y"
+        case COLORS.bug: return "bug"
+        case COLORS.video: return "video"
+        default: return "bug"
+    }
+}
+
 function parseReport(msg: any, channelName: ChannelName): BugReportData | null {
     const embed = msg.embeds?.[0]
     if (!embed) return null
@@ -18,7 +27,7 @@ function parseReport(msg: any, channelName: ChannelName): BugReportData | null {
     if (!user) return null
 
     const color = embed.color
-    const type: BugReportData["type"] = color === COLORS.a11y ? "a11y" : "bug"
+    const type = getReportType(color)
 
     const approved = channelName !== "Approval Queue"
     const denied = channelName === "Denied Reports"

@@ -4,6 +4,8 @@
     import { IsMobile } from "$lib/hooks/is-mobile.svelte"
     import * as Chart from "@components/charts/base"
     import * as Select from "@components/select"
+    import { Switch } from "@components/switch"
+    import { Label } from "@components/label"
     import { settings } from "@localstorage"
     import { LineChart } from "layerchart"
     import { curveBumpX } from "d3-shape"
@@ -40,6 +42,20 @@
     )
 
     let width = $state(0)
+    let allDataPoints = $state(false)
+
+    const displayData = $derived.by(() => {
+        const scale = scaleUtc().domain([total[0].date, total[total.length - 1].date])
+        const dataPoints = allDataPoints ? total.length : (total.length / 2)
+        const tickDates = new Set(scale.ticks(isMobile.current ? 6 : dataPoints).map(d => d.getTime()))
+        const filtered = total.filter(d => tickDates.has(d.date.getTime()))
+        const last = total[total.length - 1]
+
+        if (filtered[filtered.length - 1]?.date.getTime() !== last.date.getTime()) {
+            return [...filtered, last]
+        }
+        return filtered
+    })
 
     const chartConfig = {
         bug: {
@@ -49,6 +65,10 @@
         a11y: {
             label: "A11y",
             color: "var(--a11y)",
+        },
+        video: {
+            label: "Video",
+            color: "var(--video)",
         }
     } satisfies ChartConfig
 </script>
@@ -58,6 +78,12 @@
         <div class="flex flex-col">
             <p class="text-lg font-bold">{details.title}</p>
             <p class="text-sm text-muted-foreground">{details.description}</p>
+            <div class="md:flex hidden items-center gap-2 mt-2">
+                <Label>
+                    Show all {total.length} data points
+                    <Switch bind:checked={allDataPoints} />
+                </Label>
+            </div>
         </div>
         <Select.Root type="single" name="data-type" bind:value={selected}>
             <Select.Trigger class="w-fit text-xs" size="sm">
@@ -77,7 +103,7 @@
     </Chart.Title>
     <Chart.Content {chartConfig} bind:width class="h-87.5">
         <LineChart
-            data={total}
+            data={displayData}
             legend={!!settings.state.legends}
             labels={!!settings.state.values}
             points={settings.state.values ? { r: 3, fill: "var(--primary)", stroke: "none" } : false}
@@ -85,7 +111,6 @@
             x="date"
             y="total"
             axis={!!settings.state.labels}
-            xScale={scaleUtc()}
             series={[
                 {
                     key: "bug",
@@ -96,6 +121,11 @@
                     key: "a11y",
                     label: "A11y",
                     color: chartConfig.a11y.color
+                },
+                {
+                    key: "video",
+                    label: "Video",
+                    color: chartConfig.video.color
                 },
             ]}
             class="mr-auto pr-4"
