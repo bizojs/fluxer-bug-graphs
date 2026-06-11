@@ -157,3 +157,7 @@
 @utility font-mono {
     font-family: var(--font-mono);
 }
+
+html {
+    scrollbar-gutter: stable;
+}
