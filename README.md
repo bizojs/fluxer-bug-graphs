@@ -47,7 +47,7 @@ interface BugReportData {
     message_id: string // the ID of the message containing the bug report
     user: string // the user that sent the report in the format: "name#discrim (id)"
     date: string // ISO date string when the report was created
-    type: "bug" | "a11y" // the type of bug
+    type: "bug" | "a11y" | "video" // the type of bug
     approved: boolean // whether the bug was approved (no longer in #Approval Queue)
     approved_timestamp: string | null // when the report was approved if applicable
     fixed: boolean | null // true: report in #Fixed Bugs | false: report in #canary/a11y-bug-report | null: report in #Claimed Fixed
