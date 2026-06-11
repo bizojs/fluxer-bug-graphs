@@ -4,7 +4,9 @@ import path from "path"
 
 interface RawMessage {
     id: string
-    [key: string]: any
+    timestamp: string
+    edited_timestamp: string | null
+    embeds: any[]
 }
 
 async function fetchMessages(channelId: string): Promise<Record<string, RawMessage>> {
@@ -32,7 +34,12 @@ async function fetchMessages(channelId: string): Promise<Record<string, RawMessa
         if (batch.length === 0) break
 
         for (const msg of batch) {
-            messages[msg.id] = msg
+            messages[msg.id] = {
+                id: msg.id,
+                embeds: msg?.embeds ?? [],
+                timestamp: msg.timestamp,
+                edited_timestamp: msg?.edited_timestamp ?? null
+            }
         }
 
         if (batch.length < 100) break
